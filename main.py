@@ -3,6 +3,7 @@ import sys
 import gkeepapi
 import requests
 import subprocess
+from datetime import datetime
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -28,8 +29,9 @@ def main():
     output, error = process.communicate()
     # Format temperature
     output = int(output.decode('ascii')[:-1])/1000
+    now = datetime.now().strftime("%d/%m/%Y, %H:%M")
     # Create note
-    note = keep.createNote('Raspberry Pi Auto Note', f"IP: {ip.text}\nTemperature: {output}°C")
+    note = keep.createNote('Raspberry Pi Auto Note', f"Time: {now} \nIP: {ip.text} \nTemperature: {output}°C")
     print(note)
     note.color = gkeepapi.node.ColorValue.Yellow
 

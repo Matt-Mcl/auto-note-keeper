@@ -1,14 +1,10 @@
 const spawn = require("child_process").spawn;
 
-// Run immediately then on a 5 minute schedule
-runProcess();
-
-setInterval(() => {
-    runProcess();
-}, 60 * 1000 * 5);
-
-
 function runProcess() {
+    let date = new Date()
+    let timeoutMinutes = 5 - (date.getMinutes() % 5);
+    setTimeout(runProcess, timeoutMinutes * 60 * 1000);
+
     const pythonProcess = spawn('venv/bin/python3',["main.py"]);
 
     pythonProcess.stdout.on('data', (data) => {
@@ -19,3 +15,5 @@ function runProcess() {
         console.log(`Python Process stderr: ${data}`);
     });
 }
+
+runProcess();
