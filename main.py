@@ -34,6 +34,7 @@ def main():
     note = keep.createNote('Raspberry Pi Auto Note', f"Time: {now} \nIP: {ip.text} \nTemperature: {output}°C")
     print(note)
     note.color = gkeepapi.node.ColorValue.Yellow
+    note.pinned = True
 
     keep.sync()
 
