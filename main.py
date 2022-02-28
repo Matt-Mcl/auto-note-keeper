@@ -31,7 +31,6 @@ def main():
     note.color = gkeepapi.node.ColorValue.Yellow
 
     keep.sync()
-    
 
 
 if __name__ == '__main__':
