@@ -9,6 +9,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 def main():
+    now = datetime.now().strftime("%d/%m/%Y, %H:%M")
     keep = gkeepapi.Keep()
     email = os.getenv('EMAIL')
     secret = os.getenv('SECRET')
@@ -29,7 +30,6 @@ def main():
     output, error = process.communicate()
     # Format temperature
     output = int(output.decode('ascii')[:-1])/1000
-    now = datetime.now().strftime("%d/%m/%Y, %H:%M")
     # Create note
     note = keep.createNote('Raspberry Pi Auto Note', f"Time: {now} \nIP: {ip.text} \nTemperature: {output}°C")
     print(note)
