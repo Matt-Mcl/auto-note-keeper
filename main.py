@@ -14,27 +14,29 @@ def main():
     email = os.getenv('EMAIL')
     secret = os.getenv('SECRET')
     keep.login(email, secret)
-    # Find existing note
-    note = keep.find(query='Raspberry Pi Auto Note')
-    try:
-        # Delete existing note
-        next(note).delete()
-    except StopIteration:
-        # Note doesn't exist
-        pass
+
     # Get IP address
     ip = requests.get('https://ifconfig.me/')
-    # Get temperature
+
+    # Get and format temperature
     temp_command = ["cat", "/sys/class/thermal/thermal_zone0/temp"]
     process = subprocess.Popen(temp_command, stdout=subprocess.PIPE)
     output, error = process.communicate()
-    # Format temperature
-    output = int(output.decode('ascii')[:-1])/1000
-    # Create note
-    note = keep.createNote('Raspberry Pi Auto Note', f"Time: {now} \nIP: {ip.text} \nTemperature: {output}°C")
+    temperature = int(output.decode('ascii')[:-1])/1000
+
+    # Create the text for the note
+    note_text = f"Time: {now} \nIP: {ip.text} \nTemperature: {temperature}°C"
+
+    #Update note, or create new
+    try:
+        note = next(keep.find(query='Raspberry Pi Auto Note'))
+        note.text = note_text
+    except StopIteration:
+        note = keep.createNote('Raspberry Pi Auto Note', note_text)
+        note.color = gkeepapi.node.ColorValue.Yellow
+        note.pinned = True
+    
     print(note)
-    note.color = gkeepapi.node.ColorValue.Yellow
-    note.pinned = True
 
     keep.sync()
 
