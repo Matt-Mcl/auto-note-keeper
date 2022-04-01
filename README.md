@@ -14,7 +14,10 @@ EMAIL=<GOOGLE_ACCOUNT_EMAIL>
 SECRET=<GOOGLE_APP_PASSWORD>
 ```
 
-3. Modify [main.py](main.py) to your liking. This example retrieves the date, public IP address and CPU temperatue of a Raspberry Pi 4. 
+3. Modify [main.py](main.py) to your liking. This example retrieves the date, public IP address and CPU temperatue of a Raspberry Pi 4: 
+
+![note](https://user-images.githubusercontent.com/46825394/161248689-29ea5cbf-84b8-4b42-befd-466f9683d620.png)
+
 
 4. Modify the cronjob in [setup.sh](setup.sh) to the interval you want. Default is 5 minutes.
 
