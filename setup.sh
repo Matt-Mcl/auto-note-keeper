@@ -17,7 +17,7 @@ if [ ! -d $venvlocation ]; then
 fi
 
 echo "------- Doing initial run ------"
-bash run.sh "$directory"
+bash $script "$directory"
 echo "----- Finished initial run -----"
 
 # Delete existing crontabs - means crontab is only present once

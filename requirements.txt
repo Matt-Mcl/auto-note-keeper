@@ -4,8 +4,10 @@ future==0.18.2
 gkeepapi==0.13.7
 gpsoauth==1.0.0
 idna==3.3
+pkg_resources==0.0.0
 pycryptodomex==3.14.1
 python-dotenv==0.19.2
+pytz==2022.1
 requests==2.27.1
 six==1.16.0
 urllib3==1.26.8

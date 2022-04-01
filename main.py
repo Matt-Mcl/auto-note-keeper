@@ -1,4 +1,5 @@
 import os
+import pytz
 import gkeepapi
 import requests
 import subprocess
@@ -8,7 +9,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 def main():
-    now = datetime.now().strftime("%d/%m/%Y, %H:%M")
+    now = datetime.now(pytz.timezone("Europe/London")).strftime("%d/%m/%Y, %H:%M")
     keep = gkeepapi.Keep()
     email = os.getenv('EMAIL')
     secret = os.getenv('SECRET')
