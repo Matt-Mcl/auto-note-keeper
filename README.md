@@ -2,13 +2,9 @@
 
 ## What is this?
 
----
-
 This is a small application that automatically logs data to a [Google Keep](https://www.google.com/keep/) note using a cronjob. This uses the the [gkeepapi PyPi package](https://pypi.org/project/gkeepapi/) to create and update notes.
 
 ## Setup
-
----
 
 1. Create Google App Password here: https://myaccount.google.com/apppasswords
 
