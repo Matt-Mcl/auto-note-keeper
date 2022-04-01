@@ -1,5 +1,4 @@
 import os
-import sys
 import gkeepapi
 import requests
 import subprocess
@@ -42,7 +41,9 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
-    print('Ran successfully')
-    sys.stdout.flush()
-    sys.stderr.flush()
+    try:
+        main()
+        print('Ran successfully')
+    except Exception as e:
+        print(e)
+        print('Run Failed')
