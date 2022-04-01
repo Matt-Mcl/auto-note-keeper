@@ -10,16 +10,18 @@ username=$(whoami)
 if [ ! -d $venvlocation ]; then
     echo "venv not present - creating" 
     python3 -m venv venv
-    source "venv/bin/activate"
+    source "$venvlocation/bin/activate"
 
     pip install --upgrade pip
     pip install -r requirements.txt
 fi
 
+echo "------- Doing initial run ------"
 bash run.sh "$directory"
+echo "----- Finished initial run -----"
 
 # Delete existing crontabs - means crontab is only present once
-crontab -r >> /dev/null
+sudo crontab -u "$username" -l | grep -v "$script" | crontab -u "$username" -
 
 # Create crontab to run script
 (crontab -l 2>/dev/null; echo "$cron $script $directory") | crontab -
