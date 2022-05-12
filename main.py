@@ -22,7 +22,11 @@ temp_command = ["cat", "/sys/class/thermal/thermal_zone0/temp"]
 output = check_output(temp_command)
 temperature = int(output.decode('ascii')[:-1])/1000
 
-notes = [f"Time: {now}", f"IP: {ip.text}", f"Temperature: {temperature}°C"]
+notes = [
+    (f"Time: {now}", ""),
+    ("IP: (Hidden)", ip.text),
+    (f"Temperature: {temperature}°C", "")
+]
 
 for note, card_id in zip(notes, cards):
     put(
@@ -30,6 +34,7 @@ for note, card_id in zip(notes, cards):
         params = {
             "key": key,
             "token": token,
-            "name": note
+            "name": note[0],
+            "desc": note[1]
         }
     )
